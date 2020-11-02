@@ -19,13 +19,10 @@ module.exports.run = async (client, message, args) => {
     }
     else {
         var pagen = 1;
-        try{
+        if(query.includes("> ")){
             var query3 =query.split("> ");
             query = query3[1];
             pagen=Number(query3[0])
-        }
-        catch{
-            pagen=1
         }
         var query2 = query.replace(" ",",");
         var searchResult = await api.search(query2,pagen).then();
@@ -62,7 +59,7 @@ module.exports.run = async (client, message, args) => {
                     name: client.user.username,
                     icon_url: profilepic
                 },
-                title: `Search Result for ${query2}`,
+                title: `Search Result for ${query}`,
                 description: `Page: ${pagen} of ${searchResult.pages}`,
                 fields: arr,
                 timestamp: new Date(),
