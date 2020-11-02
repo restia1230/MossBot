@@ -9,8 +9,8 @@ module.exports.run = async (client, message, args) => {
     if (!args.length) {
         return message.channel.send('You need to supply a search term!');
     }
-    const query = message.content.substring(9);
-    if (query.length == 6) {
+    var query = message.content.substring(9);
+    if (query.match(/^[0-9]+$/) && query.length == 6) {
         api.getBook(query).then(book => {
             var a = api.getImageURL(book.cover);    // https://t.nhentai.net/galleries/987560/cover.jpg
             api.getImageURL(book.pages[1]); // https://i.nhentai.net/galleries/987560/2.jpg
@@ -18,7 +18,17 @@ module.exports.run = async (client, message, args) => {
         });
     }
     else {
-        var searchResult = await api.search(query).then();
+        var pagen = 1;
+        try{
+            var query3 =query.split("> ");
+            query = query3[1];
+            pagen=Number(query3[0])
+        }
+        catch{
+            pagen=1
+        }
+        var query2 = query.replace(" ",",");
+        var searchResult = await api.search(query2,pagen).then();
         //console.log(searchResult)
         var books1 = searchResult.books;
         var dict1 = {};
@@ -52,7 +62,8 @@ module.exports.run = async (client, message, args) => {
                     name: client.user.username,
                     icon_url: profilepic
                 },
-                title: `Search Result for ${query}`,
+                title: `Search Result for ${query2}`,
+                description: `Page: ${pagen} of ${searchResult.pages}`,
                 fields: arr,
                 timestamp: new Date(),
                 footer: {
