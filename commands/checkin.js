@@ -38,7 +38,6 @@ exports.run = async (client, message, args, ops) => {
     if(!(d >= startHappyHourD && d <=endHappyHourD )){
         return(message.channel.send("You must checkin between 9:30 am and 10:30 am"));
     }
-    console.log(d)
     var dayt = d.getDate();
 
     
