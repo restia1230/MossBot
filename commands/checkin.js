@@ -11,7 +11,9 @@ async function add(client, message, daten){
         lastcheck: daten
     })
     await membadd.save().catch(err => console.log(err));
-    return(message.channel.send(`${message.author.username} successfully checked in for the first time.`));
+    message.react('👑');
+    //return(message.channel.send(`${message.author.username} successfully checked in for the first time.`));
+    return;
 }
 
 async function update(item, client, message, dayt){
@@ -21,8 +23,9 @@ async function update(item, client, message, dayt){
     item.checkcount++;
     item.lastcheck = dayt;
     await item.save().catch(err => console.log(err));
-
-    return(message.channel.send(`${message.author.username} successfully checked in.`));
+    message.react('👑');
+    //return(message.channel.send(`${message.author.username} successfully checked in.`));
+    return;
 }
 
 exports.run = async (client, message, args, ops) => {
