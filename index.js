@@ -55,7 +55,7 @@ client.on('ready', () => {
   setInterval(function () {
     var currentdate = new Date();
     if (currentdate.getHours() == 14 && currentdate.getMinutes() >= 30 && currentdate.getMinutes() < 35) {
-      client.channels.cache.get('763584898564882492').send('Good Morning Kings 👑');
+      client.channels.cache.get('608862609927569445').send('Good Morning Kings 👑');
     }
   }, MIN_INTERVAL)
 });
