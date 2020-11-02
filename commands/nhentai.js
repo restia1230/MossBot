@@ -11,21 +11,26 @@ module.exports.run = async (client, message, args) => {
     }
     var query = message.content.substring(9);
     if (query.match(/^[0-9]+$/) && query.length == 6) {
-        api.getBook(query).then(book => {
-            var a = api.getImageURL(book.cover);    // https://t.nhentai.net/galleries/987560/cover.jpg
-            api.getImageURL(book.pages[1]); // https://i.nhentai.net/galleries/987560/2.jpg
-            message.channel.send(`https://nhentai.net/g/${query}/\n`+a).catch(console.error);
-        });
+        try {
+            api.getBook(query).then(book => {
+                var a = api.getImageURL(book.cover);    // https://t.nhentai.net/galleries/987560/cover.jpg
+                
+                message.channel.send(`https://nhentai.net/g/${query}/\n` + a)
+            });
+        }
+        catch {
+            message.channel.send("Invalid Search!");
+        }
     }
     else {
         var pagen = 1;
-        if(query.includes("> ")){
-            var query3 =query.split("> ");
+        if (query.includes("> ")) {
+            var query3 = query.split("> ");
             query = query3[1];
-            pagen=Number(query3[0])
+            pagen = Number(query3[0])
         }
-        var query2 = query.replace(" ",",");
-        var searchResult = await api.search(query2,pagen).then();
+        var query2 = query.replace(" ", ",");
+        var searchResult = await api.search(query2, pagen).then();
         //console.log(searchResult)
         var books1 = searchResult.books;
         var dict1 = {};
@@ -80,14 +85,14 @@ function field(items, books1) {
     count = 0
     for (i in items) {
         var title = "n/a";
-        if (books1[items[i][0]].title["english"] != null){
+        if (books1[items[i][0]].title["english"] != null) {
             title = books1[items[i][0]].title["english"];
         }
         var item = {
             name: `#${count + 1}, ${books1[[items[i][0]]].id}`,
-            value: `Title: ${title}\n`+
-            `Favorites: ${books1[[items[i][0]]].favorites}\n`+
-            `[Link](https://nhentai.net/g/${books1[[items[i][0]]].id})`
+            value: `Title: ${title}\n` +
+                `Favorites: ${books1[[items[i][0]]].favorites}\n` +
+                `[Link](https://nhentai.net/g/${books1[[items[i][0]]].id})`
         }
         count++;
         arr.push(item);
