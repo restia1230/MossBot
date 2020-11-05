@@ -48,7 +48,7 @@ function field(items, n,s) {
   var arr = [];
   for (var i = 0; i < n - 1; i++) {
     var fire = '';
-    if(items[i].checkcount==s){
+    if(items[i].checkcount==s && items[i].checkcount>=5){
       fire = '🔥'
     }
     var item = {
