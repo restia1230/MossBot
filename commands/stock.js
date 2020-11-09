@@ -20,6 +20,7 @@ exports.run = async (client, message, args, ops) => {
     else{
         change_emoji = ":chart_with_downwards_trend:"
     }
+    var perc = Math.round(stonk.changePercent*100000)/100000;
     const embed1 = new Discord.MessageEmbed()
             .setColor('#00FF80') // Set the color for the side pannel
             .setTitle(`**${stonk.symbol}**`) // set the title
@@ -28,7 +29,7 @@ exports.run = async (client, message, args, ops) => {
             { name: `**${stonk.companyName}**`, value: 
             "**Current Price**: "+ `__${stonk.iexRealtimePrice}__` +"\n" +
             "**Change**: $"+ stonk.change + " "+change_emoji +"\n" +
-            "**% Change**: "+ stonk.changePercent*100 + "% " + change_emoji +"\n" +
+            "**% Change**: "+ perc *100 + "% " + change_emoji +"\n" +
             "**Previous Close**: $"+ stonk.previousClose +"\n" +
             "**52 Week High**: $"+ stonk.week52High +"\n" +
             "**52 Week Low**: $"+ stonk.week52Low +"\n" },
