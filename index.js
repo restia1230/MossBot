@@ -57,7 +57,7 @@ client.on('ready', () => {
   console.info(`Logged in as ${client.user.tag}!`);
   setInterval(async function () {
     var currentdate = new Date();
-    if (currentdate.getHours() == 14 && currentdate.getMinutes() >= 30 && currentdate.getMinutes() < 35) {
+    if (currentdate.getHours() == 13 && currentdate.getMinutes() >= 0 && currentdate.getMinutes() < 5) {
       client.channels.cache.get('608862609927569445').send('Good Morning Kings 👑');
       await mongoose.connect(`mongodb+srv://${mongopw}?retryWrites=true&w=majority`);
       await check.findOne({discordID: 69}, async function (err, items) {
