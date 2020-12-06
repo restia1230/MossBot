@@ -48,4 +48,4 @@ This bot was created for personal use and is designed for specific single server
 
 ## License & Legal
 
-Copyright © 2020 LunaBot
+Copyright © 2020 MossBot
