@@ -50,7 +50,6 @@ exports.run = async (client, message, args, ops) => {
         else {
             await update(items,client,message, dayt);
         }
-        mongoose.connection.close();
     });
-
+    mongoose.connection.close();
 }

@@ -17,8 +17,7 @@ async function add(client, message, stockname) {
 }
 
 async function update(item, client, message, stockname) {
-    console.log(item)
-    if (item.stockList.length >= 6) {
+    if (item.stockList.length >= 10) {
         return (message.channel.send(`${message.author.username} is at max stocks in watchlist.`));
     }
     item.stockList.push(stockname);

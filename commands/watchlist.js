@@ -37,15 +37,15 @@ async function update(item, client, message) {
         }
         arr.push(item1);
     }
-    var sub ='';
-    if(pos>neg){
+    var sub = '';
+    if (pos > neg) {
         sub = "Bull Gang";
     }
-    else if(pos<neg){
-        sub ="Bear Gang";
+    else if (pos < neg) {
+        sub = "Bear Gang";
     }
-    else if(pos==neg){
-        sub="Theta Gang"
+    else if (pos == neg) {
+        sub = "Theta Gang"
     }
     message.channel.send({
         embed: {
@@ -54,7 +54,7 @@ async function update(item, client, message) {
                 name: client.user.username,
                 icon_url: profilepic
             },
-            title: `Stock watchlist of ${message.author.username}`,
+            title: `${message.author.username}'s stock watchlist`,
             description: `${sub}`,
             fields: arr,
             timestamp: new Date(),
@@ -76,6 +76,6 @@ module.exports.run = async (client, message, args) => {
         else {
             await update(items, client, message);
         }
+        mongoose.connection.close();
     });
-    mongoose.connection.close();
 }
