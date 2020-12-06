@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const check = require("./models/check.js");
 client.config = config;
 const mongopw = process.env.mongo;
+const morning = process.env.morning;
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
@@ -58,8 +59,8 @@ client.on('ready', () => {
   setInterval(async function () {
     var currentdate = new Date();
     if (currentdate.getHours() == 13 && currentdate.getMinutes() >= 0 && currentdate.getMinutes() < 5) {
-      client.channels.cache.get('608862609927569445').send('Good Morning Kings 👑');
-      await mongoose.connect(`mongodb+srv://${mongopw}?retryWrites=true&w=majority`);
+      client.channels.cache.get(morning).send('Good Morning Kings 👑');
+      await mongoose.connect(mongopw);
       await check.findOne({discordID: 69}, async function (err, items) {
         items.checkcount--;
         var dayt = currentdate.getDate();

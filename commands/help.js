@@ -59,7 +59,7 @@ module.exports.run = async (client, message, args) => {
                         "(i.e. !stockadd AMD)\n" +
                         "**!stockdel**: Delete a stock from your watchlist\n" +
                         "(i.e. !stockdel AMD)\n" +
-                        "**!watchlist**: Display your personal watchlist\n"
+                        "**!watchlist**: Display your personal stock watchlist\n"
             }
             )
             .setTimestamp()
