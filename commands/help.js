@@ -16,7 +16,6 @@ module.exports.run = async (client, message, args) => {
                         "**!ranking**: Display checkin ranking for the server\n" +
                         "\n" +
                         "**!help stock**: Help page for stock commands\n" +
-                        "\n" +
                         "**!help nhentai**: Help page for nhentai commands\n" +
                         "\n"
                 }

@@ -1,6 +1,6 @@
 const check = require("../models/check.js");
 const mongoose = require("mongoose");
-const mongopw = process.env.mongo;
+const mongomoss = process.env.mongo;
 
 async function add(client, message, daten){
     const membadd = new check({
@@ -41,7 +41,7 @@ exports.run = async (client, message, args, ops) => {
     var dayt = d.getDate();
 
     
-    await mongoose.connect(`mongodb+srv://${mongopw}?retryWrites=true&w=majority`);
+    await mongoose.connect(mongomoss, { useNewUrlParser: true, useUnifiedTopology: true });
 
     await check.findOne({discordID: message.author.id}, async function (err, items) {
         if (!items){
