@@ -6,7 +6,7 @@ const profilepic = process.env.profilepic;
 const mongopw = process.env.mongo;
 module.exports.run = async (client, message) => {
 
-  await mongoose.connect(`mongodb+srv://${mongopw}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
+  await mongoose.connect(`${mongopw}`);
 
   await Level.countDocuments(function (err, count) {
     if (count >= 10) {

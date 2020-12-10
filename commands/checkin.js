@@ -41,7 +41,7 @@ exports.run = async (client, message, args, ops) => {
     var dayt = d.getDate();
 
     
-    await mongoose.connect(mongomoss, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(mongomoss);
 
     await check.findOne({discordID: message.author.id}, async function (err, items) {
         if (!items){
