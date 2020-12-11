@@ -15,7 +15,7 @@ fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
     let eventName = new String(file.split(".")[0]);
-    if (eventName.valueOf() !== "reacts" && eventName.valueOf() !== "level" && eventName.valueOf() !== "messageReactionAdd" && eventName.valueOf() !== "messageReactionRemove") {
+    if (eventName.valueOf() !== "tunes" && eventName.valueOf() !== "level" && eventName.valueOf() !== "messageReactionAdd" && eventName.valueOf() !== "messageReactionRemove") {
       const event = require(`./events/${file}`);
       client.on(eventName, event.bind(null, client));
     }
@@ -54,6 +54,9 @@ for (const file of commandFiles) {
 }
 client.login(TOKEN);
 const MIN_INTERVAL = 1000 * 60 *5;
+
+
+
 client.on('ready', () => {
   console.info(`Logged in as ${client.user.tag}!`);
   setInterval(async function () {
