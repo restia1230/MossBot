@@ -20,7 +20,7 @@ module.exports = (client, message) => {
   const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
-if(message.channel.id == '778451230271733791' || message.channel.id =='763584898564882492'){
+if(message.channel.id == '778451230271733791'){
   const tunes = require(`./tunes/tunes.js`);
   tunes.run(client, message);
 }
