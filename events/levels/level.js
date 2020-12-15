@@ -65,6 +65,6 @@ module.exports.run = async (client, message) => {
         });
 
 
-        mongoose.connection.close();
+        await mongoose.connection.close();
     }
 }
