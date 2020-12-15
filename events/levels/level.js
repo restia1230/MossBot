@@ -62,9 +62,9 @@ module.exports.run = async (client, message) => {
             else {
                 curr = await channelUpdate(items, client, message);
             }
-        });
+        }).then(mongoose.connection.close());
 
 
-        await mongoose.connection.close();
+        // await mongoose.connection.close();
     }
 }
