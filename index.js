@@ -15,7 +15,7 @@ fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
     let eventName = new String(file.split(".")[0]);
-    if (eventName.valueOf() !== "tunes" && eventName.valueOf() !== "level" && eventName.valueOf() !== "messageReactionAdd" && eventName.valueOf() !== "messageReactionRemove") {
+    if (eventName.valueOf() !== "tunes" && eventName.valueOf() !== "levels" && eventName.valueOf() !== "messageReactionRemove") {
       const event = require(`./events/${file}`);
       client.on(eventName, event.bind(null, client));
     }

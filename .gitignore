@@ -3,3 +3,4 @@ node_modules
 token.json
 client_secret.json
 \commands/announcement.js
+commands/datalog.js

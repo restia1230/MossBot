@@ -24,6 +24,11 @@ if(message.channel.id == '778451230271733791'){
   const tunes = require(`./tunes/tunes.js`);
   tunes.run(client, message);
 }
+
+if(message.guild.id == '608862609927569440'){
+  const level = require(`./levels/level.js`);
+  level.run(client, message);
+}
   
   const cmd = client.commands.get(command);
 
