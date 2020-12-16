@@ -105,7 +105,7 @@ module.exports.run = async (client) => {
                     }
                     count++;
                     if (count == membersAFK.members.size && cases == 1){
-                        mongoose.disconnect().then(console.log("CLOSED1"));
+                        mongoose.disconnect();
                     }
                 });
             }
@@ -132,7 +132,7 @@ module.exports.run = async (client) => {
                     }
                     count++;
                     if (count == membersAFK.members.size && cases == 2){
-                        mongoose.disconnect().then(console.log("CLOSED2"));
+                        mongoose.disconnect();
                     }
                 });
             }
@@ -159,7 +159,7 @@ module.exports.run = async (client) => {
                     }
                     count++;
                     if (count == membersAFK.members.size && cases == 3){
-                        mongoose.disconnect().then(console.log("CLOSED3"));
+                        mongoose.disconnect();
                     }
                 });
             }
