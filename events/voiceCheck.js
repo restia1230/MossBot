@@ -75,7 +75,7 @@ module.exports.run = async (client) => {
     if (membersAFK.members.size > 0) cases = 2;
     if (membersOther.members.size > 0) cases = 3;
     if (membersTalk.members.size > 0 || membersOther.members.size > 0 || membersAFK.members.size > 0) {
-        await mongoose.connect(mongopw, 30);
+        await mongoose.connect(mongopw, {poolSize: 25});
         if (membersTalk.members.size > 0) {
             var memkey = membersTalk.members.keys();
             await level.findOne({ discordID: membersTalk.id }, async function (err, items) {
