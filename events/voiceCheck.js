@@ -59,6 +59,7 @@ async function channelAdd(client, members) {
 
 async function channelUpdate(item, client, type1, members) {
     item.minutes = item.minutes + 1 * members.members.size;
+    item.afk = item.afk ++;
     await item.save().catch(err => console.log(err));
 }
 
@@ -68,7 +69,10 @@ module.exports.run = async (client) => {
     var membersTalk = client.channels.cache.get('608862609927569449');
     var membersOther = client.channels.cache.get('627316866108358668');
     var membersAFK = client.channels.cache.get('608863334250577920');
-
+    var cases;
+    if (membersTalk.members.size > 0) cases = 1;
+    if (membersAFK.members.size > 0) cases = 2;
+    if (membersOther.members.size > 0) cases = 3;
     if (membersTalk.members.size > 0 || membersOther.members.size > 0 || membersAFK.members.size > 0) {
         await mongoose.connect(mongopw);
         if (membersTalk.members.size > 0) {
@@ -89,6 +93,9 @@ module.exports.run = async (client) => {
                     }
                     else {
                         await update(items, client, "Talk");
+                    }
+                    if (cases == 1) {
+                        mongoose.connection.close();
                     }
                 });
             }
@@ -112,6 +119,9 @@ module.exports.run = async (client) => {
                     else {
                         await update(items, client, "AFK");
                     }
+                    if (cases == 2) {
+                        mongoose.connection.close();
+                    }
                 });
             }
         }
@@ -134,6 +144,9 @@ module.exports.run = async (client) => {
                     else {
                         await update(items, client, "Talk");
                     }
+                    if (cases == 3) {
+                        mongoose.connection.close();
+                    }
                 });
             }
         }
@@ -141,5 +154,4 @@ module.exports.run = async (client) => {
     else {
         return;
     }
-    mongoose.connection.close();
 }
