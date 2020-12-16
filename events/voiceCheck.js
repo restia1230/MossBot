@@ -95,7 +95,6 @@ module.exports.run = async (client) => {
             var count = 0;
             for await (let i of membersTalk.members) {
                 var tempID = memkey.next().value;
-                console.log(tempID)
                 await level.findOne({ discordID: tempID }, async function (err, items) {
                     if (!items) {
                         await add(client, tempID);
