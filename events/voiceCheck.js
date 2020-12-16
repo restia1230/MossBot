@@ -40,6 +40,7 @@ async function update(item, client, type1) {
     }
     item.type = 1;
     await item.save().catch(err => console.log(err));
+    console.log("UPDATEHEREAAA")
     return;
 }
 
@@ -95,7 +96,7 @@ module.exports.run = async (client) => {
                         await update(items, client, "Talk");
                     }
                     if (cases == 1) {
-                        mongoose.connection.close();
+                        mongoose.connection.close().then(console.log("CLOSED"));
                     }
                 });
             }
@@ -120,7 +121,7 @@ module.exports.run = async (client) => {
                         await update(items, client, "AFK");
                     }
                     if (cases == 2) {
-                        mongoose.connection.close();
+                        mongoose.connection.close().then(console.log("CLOSED"));
                     }
                 });
             }
@@ -145,7 +146,7 @@ module.exports.run = async (client) => {
                         await update(items, client, "Talk");
                     }
                     if (cases == 3) {
-                        mongoose.connection.close();
+                        mongoose.connection.close().then(console.log("CLOSED"));
                     }
                 });
             }

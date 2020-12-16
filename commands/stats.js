@@ -49,6 +49,7 @@ async function embedAll(items1, items2, embed1, client, message, items3) {
         var afklen = Math.min(items3.length, 7);
         embed1.setDescription(`\n Voice statistics since Dec 15, 2020. \n`);
         var serverReport = "";
+        var serverReport2 = '';
         for (var i = 0; i < 2; i++) {
             var hr = Math.floor(items1[i].minutes / 60);
             var minute = items1[i].minutes % 60;
@@ -60,7 +61,19 @@ async function embedAll(items1, items2, embed1, client, message, items3) {
             if (minute == 0) {
                 minuteO = "";
             }
+
+            var hr = Math.floor(items1[i].afk / 60);
+            var minute = items1[i].afk % 60;
+            var hrO2 = `${hr} Hours`;
+            var minuteO2 = `${minute} Minutes`;
+            if (hr == 0) {
+                hrO2 = "";
+            }
+            if (minute == 0) {
+                minuteO2 = "";
+            }
             serverReport = serverReport + `\`#${i + 1}\` <#${items1[i].discordID}>: \`${hrO} ${minuteO}\` \n`
+            serverReport2 = serverReport2 + `\`#${i + 1}\` <#${items1[i].discordID}>: \`${hrO2} ${minuteO2}\` \n`
         }
         var TalkReport = "";
         for (var i = 0; i < memlen; i++) {
@@ -94,7 +107,11 @@ async function embedAll(items1, items2, embed1, client, message, items3) {
         }
         embed1.addFields(
             {
-                name: '**Voice Channel Ranking**',
+                name: '**Voice Channel Ranking (Non-Culmulative)**',
+                value: `${serverReport2}\n`
+            },
+            {
+                name: '**Voice Channel Ranking (User Culmulative)**',
                 value: `${serverReport}\n`
             },
             {
@@ -106,7 +123,7 @@ async function embedAll(items1, items2, embed1, client, message, items3) {
                 value: `${AFKReport} \n`
             }
         )
-        
+
         lab1 = "Minutes in Talk Shack (Bar)";
         lab2 = "Minutes in Talk Shack (Line)";
     }
@@ -115,7 +132,7 @@ async function embedAll(items1, items2, embed1, client, message, items3) {
         .setTimestamp()
 
 
-    
+
     const width = 1200;
     const height = 800;
     var type = '';
