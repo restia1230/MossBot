@@ -3,9 +3,9 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 function getDirectories() {
-	return fs.readdirSync('./commands').filter(function subFolder(file) {
-		return fs.statSync('./commands/' + file).isDirectory();
-	});
+  return fs.readdirSync('./commands').filter(function subFolder(file) {
+    return fs.statSync('./commands/' + file).isDirectory();
+  });
 }
 
 module.exports = (client, message) => {
@@ -20,16 +20,18 @@ module.exports = (client, message) => {
   const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
-if(message.channel.id == '778451230271733791'){
-  const tunes = require(`./tunes/tunes.js`);
-  tunes.run(client, message);
-}
+  if (message.channel.id == '778451230271733791') {
+    const tunes = require(`./tunes/tunes.js`);
+    tunes.run(client, message);
+  }
 
-if(message.guild.id == '608862609927569440'){
-  const level = require(`./levels/level.js`);
-  level.run(client, message);
-}
-  
+  if (message.content.indexOf(client.config.prefix) !== 0) {
+    if (message.guild.id == '608862609927569440') {
+      const level = require(`./levels/level.js`);
+      level.run(client, message);
+    }
+  }
+
   const cmd = client.commands.get(command);
 
 
