@@ -6,7 +6,8 @@ const levelSchema = mongoose.Schema({
     name: String,
     chatcount: Number,
     minutes: Number,
-    type: Number
+    type: Number,
+    afk: Number
 })
 
 module.exports = mongoose.model("level", levelSchema);

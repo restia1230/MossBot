@@ -9,7 +9,8 @@ async function add(client, message) {
         name: message.author.username,
         chatcount: 1,
         minutes: 0,
-        type: 1
+        type: 1,
+        afk: 0
     })
     await membadd.save().catch(err => console.log(err));
     return;
@@ -29,7 +30,8 @@ async function channelAdd(client, message) {
         name: message.channel.name,
         chatcount: 1,
         minutes: 0,
-        type: 0
+        type: 0,
+        afk: 0
     })
     await membadd.save().catch(err => console.log(err));
     return;
@@ -64,8 +66,5 @@ module.exports.run = async (client, message) => {
             }
             mongoose.connection.close();
         });
-
-
-        // await mongoose.connection.close();
     }
 }

@@ -7,6 +7,7 @@ const fs = require("fs");
 const config = require("./config.json");
 const mongoose = require("mongoose");
 const check = require("./models/check.js");
+const vm = require(`./events/voiceCheck.js`);
 client.config = config;
 const mongopw = process.env.mongo;
 const morning = process.env.morning;
@@ -15,7 +16,7 @@ fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
     let eventName = new String(file.split(".")[0]);
-    if (eventName.valueOf() !== "tunes" && eventName.valueOf() !== "levels" && eventName.valueOf() !== "messageReactionRemove") {
+    if (eventName.valueOf() !== "tunes" && eventName.valueOf() !== "levels" && eventName.valueOf() !== "voiceCheck") {
       const event = require(`./events/${file}`);
       client.on(eventName, event.bind(null, client));
     }
@@ -53,15 +54,13 @@ for (const file of commandFiles) {
   client.commands.set(commandName, command1);
 }
 client.login(TOKEN);
-const MIN_INTERVAL = 1000 * 60 *5;
-
-
+const MIN_INTERVAL = 1000 * 60 *1;
 
 client.on('ready', () => {
   console.info(`Logged in as ${client.user.tag}!`);
   setInterval(async function () {
     var currentdate = new Date();
-    if (currentdate.getHours() == 13 && currentdate.getMinutes() >= 0 && currentdate.getMinutes() < 5) {
+    if (currentdate.getHours() == 13 && currentdate.getMinutes() >= 0 && currentdate.getMinutes() < 1) {
       client.channels.cache.get(morning).send('Good Morning Kings 👑');
       await mongoose.connect(mongopw);
       await check.findOne({discordID: 69}, async function (err, items) {
@@ -72,6 +71,7 @@ client.on('ready', () => {
         mongoose.connection.close();
     });
     }
+    vm.run(client);
   }, MIN_INTERVAL)
 });
 
