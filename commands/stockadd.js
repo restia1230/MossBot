@@ -36,7 +36,7 @@ module.exports.run = async (client, message, args) => {
         });
 
     if (continue1) {
-        await mongoose.connect(mongostock, { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect(mongostock, { useNewUrlParser: true, useUnifiedTopology: true }).catch(err => console.log("STOCKADD"));;
 
         await stock.findOne({ discordID: message.author.id }, async function (err, items) {
             if (!items) {

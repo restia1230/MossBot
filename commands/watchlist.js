@@ -67,7 +67,7 @@ async function update(item, client, message) {
 
 
 module.exports.run = async (client, message, args) => {
-    await mongoose.connect(mongostock, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(mongostock, { useNewUrlParser: true, useUnifiedTopology: true }).catch(err => console.log("wawtchlist"));
 
     await stock.findOne({ discordID: message.author.id }, async function (err, items) {
         if (!items) {

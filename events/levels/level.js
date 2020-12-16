@@ -46,7 +46,7 @@ async function channelUpdate(item, client, message) {
 }
 
 module.exports.run = async (client, message) => {
-    await mongoose.connect(mongopw);
+    await mongoose.connect(mongopw).catch(err => console.log(level));
     if (message.author != null) {
         await level.findOne({ discordID: message.author.id }, async function (err, items) {
             if (!items) {

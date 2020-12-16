@@ -81,7 +81,7 @@ module.exports.run = async (client) => {
         cases = 1;
     }
     if (membersTalk.members.size > 0 || membersOther.members.size > 0 || membersAFK.members.size > 0) {
-        await mongoose.connect(mongopw, { poolSize: 25 });
+        await mongoose.connect(mongopw, { poolSize: 25 }).catch(err => console.log("voice check"));
         if (membersTalk.members.size > 0) {
             var memkey = membersTalk.members.keys();
             await level.findOne({ discordID: membersTalk.id }, async function (err, items) {

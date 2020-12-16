@@ -62,7 +62,7 @@ client.on('ready', () => {
     var currentdate = new Date();
     if (currentdate.getHours() == 13 && currentdate.getMinutes() >= 0 && currentdate.getMinutes() < 1) {
       client.channels.cache.get(morning).send('Good Morning Kings 👑');
-      await mongoose.connect(mongopw);
+      await mongoose.connect(mongopw).catch(err => console.log("INDEX"));;
       await check.findOne({discordID: 69}, async function (err, items) {
         items.checkcount--;
         var dayt = currentdate.getDate();

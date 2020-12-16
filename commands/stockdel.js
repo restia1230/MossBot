@@ -24,7 +24,7 @@ async function update(item, client, message, stockname) {
 module.exports.run = async (client, message, args) => {
     let stockname = message.content.substring(10);
 
-    await mongoose.connect(mongostock, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(mongostock, { useNewUrlParser: true, useUnifiedTopology: true }).catch(err => console.log("Stockdel"));
 
     await stock.findOne({ discordID: message.author.id }, async function (err, items) {
         if (!items) {
