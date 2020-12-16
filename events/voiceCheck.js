@@ -40,7 +40,6 @@ async function update(item, client, type1) {
     }
     item.type = 1;
     await item.save().catch(err => console.log(err));
-    console.log("UPDATEHEREAAA")
     return;
 }
 
@@ -60,7 +59,7 @@ async function channelAdd(client, members) {
 
 async function channelUpdate(item, client, type1, members) {
     item.minutes = item.minutes + 1 * members.members.size;
-    item.afk = item.afk ++;
+    item.afk++;
     await item.save().catch(err => console.log(err));
 }
 
@@ -71,11 +70,18 @@ module.exports.run = async (client) => {
     var membersOther = client.channels.cache.get('627316866108358668');
     var membersAFK = client.channels.cache.get('608863334250577920');
     var cases;
-    if (membersTalk.members.size > 0) cases = 1;
-    if (membersAFK.members.size > 0) cases = 2;
-    if (membersOther.members.size > 0) cases = 3;
+
+    if (membersOther.members.size > 0) {
+        cases = 3;
+    }
+    else if (membersAFK.members.size > 0) {
+        cases = 2;
+    }
+    else if (membersTalk.members.size > 0) {
+        cases = 1;
+    }
     if (membersTalk.members.size > 0 || membersOther.members.size > 0 || membersAFK.members.size > 0) {
-        await mongoose.connect(mongopw, {poolSize: 25});
+        await mongoose.connect(mongopw, { poolSize: 25 });
         if (membersTalk.members.size > 0) {
             var memkey = membersTalk.members.keys();
             await level.findOne({ discordID: membersTalk.id }, async function (err, items) {
@@ -86,14 +92,20 @@ module.exports.run = async (client) => {
                     await channelUpdate(items, client, "Talk", membersTalk);
                 }
             });
-            for (var i = 0; i < membersTalk.members.size; i++) {
+            var count = 0;
+            for await (let i of membersTalk.members) {
                 var tempID = memkey.next().value;
+                console.log(tempID)
                 await level.findOne({ discordID: tempID }, async function (err, items) {
                     if (!items) {
                         await add(client, tempID);
                     }
                     else {
                         await update(items, client, "Talk");
+                    }
+                    count++;
+                    if (count == membersAFK.members.size && cases == 1){
+                        mongoose.disconnect().then(console.log("CLOSED1"));
                     }
                 });
             }
@@ -108,7 +120,8 @@ module.exports.run = async (client) => {
                     await channelUpdate(items, client, "AFK", membersAFK);
                 }
             });
-            for (var i = 0; i < membersAFK.members.size; i++) {
+            var count = 0;
+            for await (let i of membersAFK.members) {
                 var tempID = memkey.next().value;
                 await level.findOne({ discordID: tempID }, async function (err, items) {
                     if (!items) {
@@ -116,6 +129,10 @@ module.exports.run = async (client) => {
                     }
                     else {
                         await update(items, client, "AFK");
+                    }
+                    count++;
+                    if (count == membersAFK.members.size && cases == 2){
+                        mongoose.disconnect().then(console.log("CLOSED2"));
                     }
                 });
             }
@@ -130,7 +147,8 @@ module.exports.run = async (client) => {
                     await channelUpdate(items, client, "Talk", membersOther);
                 }
             });
-            for (var i = 0; i < membersOther.members.size; i++) {
+            var count = 0;
+            for await (let i of membersOther.members) {
                 var tempID = memkey.next().value;
                 await level.findOne({ discordID: tempID }, async function (err, items) {
                     if (!items) {
@@ -139,6 +157,10 @@ module.exports.run = async (client) => {
                     else {
                         await update(items, client, "Talk");
                     }
+                    count++;
+                    if (count == membersAFK.members.size && cases == 3){
+                        mongoose.disconnect().then(console.log("CLOSED3"));
+                    }
                 });
             }
         }
@@ -146,5 +168,4 @@ module.exports.run = async (client) => {
     else {
         return;
     }
-    mongoose.connection.close();
 }
