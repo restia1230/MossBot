@@ -95,9 +95,6 @@ module.exports.run = async (client) => {
                     else {
                         await update(items, client, "Talk");
                     }
-                    if (cases == 1) {
-                        mongoose.connection.close().then(console.log("CLOSED"));
-                    }
                 });
             }
         }
@@ -119,9 +116,6 @@ module.exports.run = async (client) => {
                     }
                     else {
                         await update(items, client, "AFK");
-                    }
-                    if (cases == 2) {
-                        mongoose.connection.close().then(console.log("CLOSED"));
                     }
                 });
             }
@@ -145,9 +139,6 @@ module.exports.run = async (client) => {
                     else {
                         await update(items, client, "Talk");
                     }
-                    if (cases == 3) {
-                        mongoose.connection.close().then(console.log("CLOSED"));
-                    }
                 });
             }
         }
@@ -155,4 +146,5 @@ module.exports.run = async (client) => {
     else {
         return;
     }
+    mongoose.connection.close();
 }
