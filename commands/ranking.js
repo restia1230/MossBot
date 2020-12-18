@@ -6,7 +6,7 @@ const profilepic = process.env.profilepic;
 const mongopw = process.env.mongo;
 module.exports.run = async (client, message) => {
 
-  await mongoose.connect(`${mongopw}`).catch(err => console.log("RANKING"));
+  await mongoose.connect(`${mongopw}`).catch(err => {console.log(err)});
 
   await Level.countDocuments(function (err, count) {
     if (count >= 10) {
