@@ -221,7 +221,7 @@ async function embedAll(items1, items2, embed1, client, message, items3) {
 module.exports.run = async (client, message, args) => {
 
     if (args == "msg") {
-        await mongoose.connect(mongopw);
+        await mongoose.connect(mongopw).catch(err => console.log("STATS1"));;
         var embed1 = new Discord.MessageEmbed();
         var items1 = await level.find({ type: 0 }).sort([['chatcount', -1]]);
         var items2 = await level.find({ type: 1 }).limit(7).sort([['chatcount', -1]])
@@ -230,7 +230,7 @@ module.exports.run = async (client, message, args) => {
         mongoose.connection.close();
     }
     else if (args == "voice") {
-        await mongoose.connect(mongopw);
+        await mongoose.connect(mongopw).catch(err => console.log("STATS2"));
         var embed1 = new Discord.MessageEmbed();
         var items1 = await level.find({ type: 0 }).sort([['minutes', -1]]);
 
