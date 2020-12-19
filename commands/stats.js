@@ -164,39 +164,16 @@ async function embedAll(items1, items2, embed1, client, message, items3) {
                     'rgba(190, 255, 151, 1)'
                 ],
                 borderWidth: 1
-            }, {
-                label: lab2,
-                data: memcount,
-                backgroundColor: [
-                    'rgba(239, 151, 151, 0.2)',
-                    'rgba(239, 151, 151, 0.2)',
-                    'rgba(239, 151, 151, 0.2)',
-                    'rgba(239, 151, 151, 0.2)',
-                    'rgba(239, 151, 151, 0.2)',
-                    'rgba(239, 151, 151, 0.2)',
-                    'rgba(239, 151, 151, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(239, 151, 151, 1)',
-                    'rgba(239, 151, 151, 1)',
-                    'rgba(239, 151, 151, 1)',
-                    'rgba(239, 151, 151, 1)',
-                    'rgba(239, 151, 151, 1)',
-                    'rgba(239, 151, 151, 1)',
-                    'rgba(239, 151, 151, 1)'
-                ],
-                borderWidth: 1,
-                type: 'line'
             }]
         },
         options: {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: false,
+                        beginAtZero: true,
                         fontSize: 16,
                         fontColor: 'rgba(190, 255, 151, 1)'
-                    }
+                    },
                 }],
                 xAxes: [{
                     ticks: {
