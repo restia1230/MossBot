@@ -30,6 +30,9 @@ module.exports = (client, message) => {
       const level = require(`./levels/level.js`);
       level.run(client, message);
     }
+    else {
+      return;
+    }
   }
 
   const cmd = client.commands.get(command);
