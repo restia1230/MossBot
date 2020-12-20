@@ -16,6 +16,7 @@ module.exports.run = async (client, message, args) => {
                         "**!ranking**: Display checkin ranking for the server\n" +
                         "**!stats**: Display options for server stats\n" +
                         "**!fact**: Display a random fact\n" +
+                        "**!quote**: Display a random quote\n" +
                         "\n" +
                         "**!help stock**: Help page for stock commands\n" +
                         "**!help nhentai**: Help page for nhentai commands\n" +
