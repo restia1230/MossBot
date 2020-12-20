@@ -14,6 +14,8 @@ module.exports.run = async (client, message, args) => {
                     name: 'Commands', value:
                         "**!checkin**: Checkin for the day, available 9:30am to 10:30am\n" +
                         "**!ranking**: Display checkin ranking for the server\n" +
+                        "**!stats**: Display options for server stats\n" +
+                        "**!fact**: Display a random fact\n" +
                         "\n" +
                         "**!help stock**: Help page for stock commands\n" +
                         "**!help nhentai**: Help page for nhentai commands\n" +

@@ -5,6 +5,7 @@ const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 const TOKEN = process.env.TOKEN;
 const fs = require("fs");
 const config = require("./config.json");
+const fetch = require('node-fetch');
 const mongoose = require("mongoose");
 const check = require("./models/check.js");
 const vm = require(`./events/voiceCheck.js`);
@@ -54,22 +55,26 @@ for (const file of commandFiles) {
   client.commands.set(commandName, command1);
 }
 client.login(TOKEN);
-const MIN_INTERVAL = 1000 * 60 *1;
+const MIN_INTERVAL = 1000 * 60 * 1;
 
 client.on('ready', () => {
   console.info(`Logged in as ${client.user.tag}!`);
   setInterval(async function () {
     var currentdate = new Date();
     if (currentdate.getHours() == 13 && currentdate.getMinutes() >= 0 && currentdate.getMinutes() < 1) {
-      client.channels.cache.get(morning).send('Good Morning Kings 👑');
+      fact = await fetch('https://uselessfacts.jsph.pl/today.json?language=en').then(res => res.json()).catch(err => {
+        return message.channel.send("Result not found.")
+      });
+      var result = fact.text.replace("`", "\`")
+      client.channels.cache.get(morning).send(`Good Morning Kings 👑 \n Today's random fact is: ${result}`);
       await mongoose.connect(mongopw).catch(err => console.log("INDEX"));;
-      await check.findOne({discordID: 69}, async function (err, items) {
+      await check.findOne({ discordID: 69 }, async function (err, items) {
         items.checkcount--;
         var dayt = currentdate.getDate();
         items.lastcheck = dayt;
         await items.save().catch(err => console.log(err));
         mongoose.connection.close();
-    });
+      });
     }
     vm.run(client);
   }, MIN_INTERVAL)
