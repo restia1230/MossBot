@@ -62,11 +62,12 @@ client.on('ready', () => {
   setInterval(async function () {
     var currentdate = new Date();
     if (currentdate.getHours() == 13 && currentdate.getMinutes() >= 0 && currentdate.getMinutes() < 1) {
-      fact = await fetch('https://uselessfacts.jsph.pl/today.json?language=en').then(res => res.json()).catch(err => {
-        return message.channel.send("Result not found.")
-      });
+      fact = await fetch('https://uselessfacts.jsph.pl/today.json?language=en').then(res => res.json()).catch(err => {});
       var result = fact.text.replace("`", "\`")
-      client.channels.cache.get(morning).send(`Good Morning Kings 👑 \n Today's random fact is: ${result}`);
+      quote = await fetch('https://quotes.rest/qod.json').then(res => res.json()).catch(err => {});
+      var quote1 = quote.contents.quotes[0].quote;
+      var author = quote.contents.quotes[0].author;
+      client.channels.cache.get(morning).send(`Good Morning Kings 👑 \nToday's random fact is: ${result} \nQuote of the day: ${quote1} - **${author}**`);
       await mongoose.connect(mongopw).catch(err => console.log("INDEX"));;
       await check.findOne({ discordID: 69 }, async function (err, items) {
         items.checkcount--;
