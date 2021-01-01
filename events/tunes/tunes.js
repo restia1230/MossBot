@@ -15,8 +15,8 @@ const yRedirect = process.env.yRedirect
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/youtube-nodejs-quickstart.json
 var SCOPES = ['https://www.googleapis.com/auth/youtubepartner', 'https://www.googleapis.com/auth/youtube', 'https://www.googleapis.com/auth/youtube.force-ssl'];
-// var TOKEN_DIR = './credentials/';
-// var TOKEN_PATH = 'token.json';
+var TOKEN_DIR = './credentials/';
+var TOKEN_PATH = 'token.json';
 var oAuth2Client;
 
 // Load client secrets from a local file.
@@ -35,6 +35,8 @@ async function authorize(callback) {
     oAuth2Client = new OAuth2(clientId, clientSecret, redirectUrl);
 
     // Check if we have previously stored a token.
+
+    // getNewToken(oAuth2Client, callback);
     callback(oAuth2Client);
     return oAuth2Client;
 }
@@ -77,6 +79,7 @@ function getNewToken(oAuth2Client, callback) {
  * @param {Object} token The token to store to disk.
  */
 function storeToken(token) {
+    console.log(token)
     try {
         fs.mkdirSync(TOKEN_DIR);
     } catch (err) {
@@ -84,10 +87,10 @@ function storeToken(token) {
             throw err;
         }
     }
-    // fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-    //     if (err) throw err;
-    //     console.log('Token stored to ' + TOKEN_PATH);
-    // });
+    fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+        if (err) throw err;
+        console.log('Token stored to ' + TOKEN_PATH);
+    });
 }
 
 /**
@@ -126,9 +129,10 @@ module.exports.run = (client, message) => {
     // Authorize a client with the loaded credentials, then call the YouTube API.
     async function addtolist() {
         await authorize(getChannel);
-        var cred = { "access_token": yTokenA, "refresh_token": yTokenR, "scope": "https://www.googleapis.com/auth/youtube.force-ssl https://www.googleapis.com/auth/youtubepartner https://www.googleapis.com/auth/youtube", "token_type": "Bearer", "expiry_date": 1607670932408 };
+        var cred = { "access_token": yTokenA, "refresh_token": yTokenR, "scope": "https://www.googleapis.com/auth/youtube.force-ssl https://www.googleapis.com/auth/youtubepartner https://www.googleapis.com/auth/youtube", "token_type": "Bearer", "expiry_date": 1608712895125 };
 
         oAuth2Client.credentials = cred;
+        console.log(oAuth2Client)
         const youtube = google.youtube({ version: 'v3', auth: oAuth2Client });
 
         if (ytdl.validateURL(message.content)) {
@@ -151,9 +155,9 @@ module.exports.run = (client, message) => {
             })
                 .then(function (response) {
                     // Handle the results here (response.result has the parsed body).
-                    // console.log("Response", response);
+                    console.log("Response", response);
                 },
-                    function (err) { });
+                    function (err) { console.log(err)});
         }
     }
 
