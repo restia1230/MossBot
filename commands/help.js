@@ -26,7 +26,7 @@ module.exports.run = async (client, message, args) => {
             .setTimestamp()
         message.channel.send({ embed: embed1 }).catch(console.error);
     }
-    else if (query = "nhentai") {
+    else if (args = "nhentai") {
         const embed1 = new Discord.MessageEmbed()
             .setColor('#00FF80') // Set the color for the side pannel
             .setTitle('MossBot Help - nhentai') // set the title
@@ -47,7 +47,7 @@ module.exports.run = async (client, message, args) => {
             .setTimestamp()
         message.channel.send({ embed: embed1 }).catch(console.error);
     }
-    else if (query = "stock") {
+    else if (args = "stock") {
         const embed1 = new Discord.MessageEmbed()
             .setColor('#00FF80') // Set the color for the side pannel
             .setTitle('MossBot Help - stock') // set the title
