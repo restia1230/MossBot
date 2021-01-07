@@ -2,8 +2,6 @@ const Discord = require('discord.js');
 const profilepic = process.env.profilepic;
 
 module.exports.run = async (client, message, args) => {
-    var query = message.content.substring(6);
-    console.log(args)
     if (!args.length) {
         const embed1 = new Discord.MessageEmbed()
             .setColor('#00FF80') // Set the color for the side pannel
