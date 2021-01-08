@@ -104,7 +104,7 @@ module.exports.run = async (client) => {
                     }
                     count++;
                     if (count == membersAFK.members.size && cases == 1){
-                        mongoose.disconnect();
+                        await mongoose.disconnect();
                     }
                 });
             }
@@ -131,7 +131,7 @@ module.exports.run = async (client) => {
                     }
                     count++;
                     if (count == membersAFK.members.size && cases == 2){
-                        mongoose.disconnect();
+                        await mongoose.disconnect();
                     }
                 });
             }
@@ -158,7 +158,7 @@ module.exports.run = async (client) => {
                     }
                     count++;
                     if (count == membersAFK.members.size && cases == 3){
-                        mongoose.disconnect();
+                        await mongoose.disconnect();
                     }
                 });
             }
