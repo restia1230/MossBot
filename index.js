@@ -67,7 +67,7 @@ client.on('ready', () => {
       quote = await fetch('https://quotes.rest/qod.json').then(res => res.json()).catch(err => {});
       var quote1 = quote.contents.quotes[0].quote;
       var author = quote.contents.quotes[0].author;
-      client.channels.cache.get(morning).send(`Good Morning Kings 👑 \nToday's random fact is: ${result} \nQuote of the day: ${quote1} - **${author}**`);
+      client.channels.cache.get(morning).send(`Good Morning Kings 👑 \n\n**Today's random fact is**: \n> ${result} \n\n**Quote of the day**: \n> ${quote1} - **${author}**`);
       await mongoose.connect(mongopw).catch(err => console.log("INDEX"));;
       await check.findOne({ discordID: 69 }, async function (err, items) {
         items.checkcount--;
