@@ -61,7 +61,7 @@ client.on('ready', () => {
   console.info(`Logged in as ${client.user.tag}!`);
   setInterval(async function () {
     var currentdate = new Date();
-    if (currentdate.getHours() == 13 && currentdate.getMinutes() >= 0 && currentdate.getMinutes() < 1) {
+    if (currentdate.getHours() == 12 && currentdate.getMinutes() >= 0 && currentdate.getMinutes() < 1) {
       fact = await fetch('https://uselessfacts.jsph.pl/today.json?language=en').then(res => res.json()).catch(err => {});
       var result = fact.text.replace("`", "\`")
       quote = await fetch('https://quotes.rest/qod.json').then(res => res.json()).catch(err => {});

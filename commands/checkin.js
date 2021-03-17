@@ -32,9 +32,9 @@ exports.run = async (client, message, args, ops) => {
 
     var d = new Date();
     var startHappyHourD = new Date();
-    startHappyHourD.setHours(13,0,0); // 5.30 pm
+    startHappyHourD.setHours(12,0,0); // 5.30 pm
     var endHappyHourD = new Date();
-    endHappyHourD.setHours(15,0,0); // 6.30 pm
+    endHappyHourD.setHours(14,0,0); // 6.30 pm
     if(!(d >= startHappyHourD && d <=endHappyHourD )){
         return(message.channel.send("You must checkin between 8:00 am and 10:00 am"));
     }
